@@ -3,6 +3,7 @@ import { DbService } from '../db/db.service';
 import { NgForm } from '@angular/forms';
 import { descryp, encrypt } from 'src/app/util/util-encrypt';
 import { Usuario } from '../interfaces/user.interface';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,8 @@ export class AuthService {
     const $datos = await this.db.table('usuarios').where('correo').equals(datos.value.correo).toArray();
 
     if(!$datos.length){
+      Swal.fire({icon: 'error',
+      title: 'Usuario no existe'});
       return false;
     }else{
       const user = $datos[0]
@@ -51,6 +54,8 @@ export class AuthService {
           return false;
         }
       }else{
+        Swal.fire({icon: 'error',
+        title: 'Usuario o contraseña invalidos'});
         return false;
       }
     }

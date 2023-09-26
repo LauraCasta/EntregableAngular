@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit {
     if(usuario){
       Swal.fire('Bienvenido al dashboard');
       this.router.navigate(['/dashboard']);
-    }else{
-      Swal.fire('Usuario o contraseña invalidos');
     }
   }
 
